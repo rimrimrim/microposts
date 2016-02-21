@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update,]
+  before_action :set_user, only: [:show, :edit, :update,]
+  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :authenticate!, only: [:edit, :update]
+
 
   def show
    @user = User.find(params[:id])
-  end
-  
-  def edit
-    @user = User.find(params[:id])
   end
   
   def update
@@ -38,7 +37,18 @@ class UsersController < ApplicationController
                                  :password_confirmation, :country)
   end
   
+  def user_profile
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :country)
+  end
+  
   def set_user
     @user = User.find(params[:id])
+  end
+  
+  def authenticate!
+    if @user != current_user
+      redirect_to root_url, flash: { dander: "不正なアクセス" }
+    end
   end
 end
