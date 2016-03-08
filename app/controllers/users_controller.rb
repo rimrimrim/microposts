@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
-  def show
-    @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
-  end
-  
   before_action :set_user, only: [:show, :edit, :update,]
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update, :followings, :followers]
   before_action :authenticate!, only: [:edit, :update]
 
 
@@ -35,6 +30,18 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.following_users
+    @followers = @user.follower_users
+  end
+    
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.follower_users
+    @followings = @user.following_users
   end
   
   private
