@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     
     validates :country,length: { in: 1..50 }
     
- def follow(other_user)
+  def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
   end
 
@@ -31,5 +31,9 @@ class User < ActiveRecord::Base
 
   def following?(other_user)
     following_users.include?(other_user)
+  end
+  
+  def feed_items
+    Micropost.where(user_id: following_user_ids + [self.id])
   end
 end
