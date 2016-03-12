@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :photos
 root to: 'static_pages#home'
   get    'signup', to: 'users#new'
   get    'login' , to: 'sessions#new'
@@ -11,6 +12,7 @@ root to: 'static_pages#home'
       get :followers
     end
   end
+  resources :photos, only: [:new, :create, :destroy, :show]
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy, :show]
 
