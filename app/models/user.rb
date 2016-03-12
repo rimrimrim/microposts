@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     
     validates :country,length: { in: 1..50 }
     
- def follow(other_user)
+  def follow(other_user)
     following_relationships.find_or_create_by(followed_id: other_user.id)
   end
 

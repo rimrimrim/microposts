@@ -11,24 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227163514) do
-
-  create_table "micropoosts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "micropoosts", ["user_id"], name: "index_micropoosts_on_user_id"
+ActiveRecord::Schema.define(version: 20160312091330) do
 
   create_table "microposts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
+    t.string   "photo"
   end
 
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
 
   create_table "relationships", force: :cascade do |t|
