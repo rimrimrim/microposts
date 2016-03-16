@@ -64,4 +64,6 @@ class UsersController < ApplicationController
       redirect_to root_url, flash: { dander: "不正なアクセス" }
     end
   end
+  
+ 
 end

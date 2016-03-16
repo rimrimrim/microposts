@@ -1,7 +1,8 @@
-<%= form_for(@micropost) do |f| %>
-  <%= render 'layouts/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
-<% end %>
+    <% @microposts = MicropostUploader.new %>
+    <%= form_for @microposts, :url => {:action => :upload} do |f| %>
+      <%= f.label :name, "name" %>
+      <%= f.text_field :name %>
+      <%= f.label :file %>
+      <%= f.file_field :file %>
+      <%= f.submit "Upload" %>
+    <% end %>
