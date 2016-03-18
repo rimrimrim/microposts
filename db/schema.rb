@@ -11,24 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227163514) do
+ActiveRecord::Schema.define(version: 20160316164519) do
 
-  create_table "micropoosts", force: :cascade do |t|
+  create_table "images", force: :cascade do |t|
     t.integer  "user_id"
-    t.text     "content"
+    t.string   "name"
+    t.string   "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "micropoosts", ["user_id"], name: "index_micropoosts_on_user_id"
+  add_index "images", ["user_id"], name: "index_images_on_user_id"
 
   create_table "microposts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
+    t.string   "micropost"
   end
 
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
 
   create_table "relationships", force: :cascade do |t|
@@ -41,6 +45,13 @@ ActiveRecord::Schema.define(version: 20160227163514) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "upload_files", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

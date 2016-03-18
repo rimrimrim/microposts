@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'uploader/index'
+  get 'uploader/form'
+  get 'uploader/upload'
+  get 'uploader/download'
+  post 'uploader/upload'
 root to: 'static_pages#home'
   get    'signup', to: 'users#new'
   get    'login' , to: 'sessions#new'
