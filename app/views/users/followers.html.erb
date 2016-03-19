@@ -15,6 +15,7 @@
       <h3>Your Followers (<%= @followers.count %>)</h3>
       <ol class="microposts">
         <%= render @followers %>
+        <%= paginate @followers %>
       </ol>
     <% end %>
   </div>

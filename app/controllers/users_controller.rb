@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def show
    @user = User.find(params[:id])
    @microposts = @user.microposts.order(created_at: :desc)
+   @microposts = @microposts.page(params[:page])
   end
   
   def update
@@ -36,12 +37,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @followings = @user.following_users
     @followers = @user.follower_users
+    @followings = @followings.page(params[:page])
   end
     
   def followers
     @user = User.find(params[:id])
     @followers = @user.follower_users
     @followings = @user.following_users
+    @followers = @followers.page(params[:page])
   end
   
   private
