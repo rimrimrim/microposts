@@ -1,0 +1,5 @@
+　<% if @micropost.image? %>
+　　<%= image_tag @micropost.image.thumb.url %>
+　<% else %>
+　　<%= image_tag 'noimage.gif' %>
+　<% end %>
