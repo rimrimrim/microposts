@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227163514) do
+ActiveRecord::Schema.define(version: 20160320173523) do
 
   create_table "micropoosts", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,9 +27,18 @@ ActiveRecord::Schema.define(version: 20160227163514) do
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
   end
 
   add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+
+  create_table "quizzes", force: :cascade do |t|
+    t.string   "word"
+    t.integer  "user_id"
+    t.integer  "word_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
@@ -52,5 +61,15 @@ ActiveRecord::Schema.define(version: 20160227163514) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+
+  create_table "words", force: :cascade do |t|
+    t.string   "question"
+    t.string   "pronunciation"
+    t.string   "string"
+    t.string   "meaning"
+    t.integer  "level"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
 end
